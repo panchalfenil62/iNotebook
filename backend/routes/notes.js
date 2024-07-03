@@ -8,7 +8,7 @@ const fetchuser = require('../middleware/fetchUser');
 router.get('/fetchallnotes', fetchuser, async (req,res) => {
     try{
     const notes = await Note.find({user: req.user.id});
-    res.json(notes);
+    if(notes){return res.json(notes);}
     }catch (error) {
         console.error(error.message);
         res.status(500).send("Internal Server Error.")
